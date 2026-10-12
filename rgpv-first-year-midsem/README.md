@@ -1,6 +1,12 @@
 # RGPV B.Tech 1st Year · AI/ML (AIML) · Mid-Sem PYQ Research
 
-**Deliverable:** [`index.html`](./index.html) — interactive study guide (subject tabs, search, progress tracking, print/PDF support).
+**Deliverables:**
+1. [`index.html`](./index.html) — interactive study guide (subject tabs, search, progress tracking, print/PDF support).
+2. [`papers/`](./papers/README.md) — **78 PDF files**: 62 original RGPV papers (2009–2019) + 16 reconstructed English papers (2022–2026).
+3. Ye `README.md` — poora research report sources ke saath.
+
+Ek hi zip me sab kuch: repo ke **Releases** section se `rgpv-btech-first-year-pyq.zip` download kar lo (guide + saare PDFs).
+
 Ye research RGPV ke public question-paper archives se banaya gaya hai, jisme **actual papers (2022 → June 2026)** ke questions extract kiye gaye hain aur **2018–2026** ke year-tags ke saath repeat-analysis di gayi hai.
 
 ---
@@ -87,6 +93,14 @@ RGPV first year me branch-specific paper nahi hota — sab branches ko 2 sets me
 - ★★★★ Algorithm + flowchart (largest of 3 numbers) — Jun 2026, Dec 2025
 - ★★★★ System vs application software; memory hierarchy & I/O devices; arrays & functions
 - 📈 **Naya trend (2024+):** MS-Word/Excel/PowerPoint, cloud computing, e-commerce/social media, IT applications (healthcare/GIS/bioinformatics) wale questions aa rahe hain.
+
+## 5.1 Downloads (PDF)
+
+- Subah-shaam ke liye sabse aasan: repo ke **Releases** page se **`rgpv-btech-first-year-pyq.zip`** (~7 MB) download karo —
+  usme ye guide (`index.html`) + saare 78 question papers PDF me hain.
+- Individual PDF: [`papers/original-archive/`](./papers/original-archive) (asli scans, 2009–2019) aur
+  [`papers/reconstructed-2022-2026/`](./papers/reconstructed-2022-2026) (saaf English, 2022–2026).
+- Poori index: [`papers/INDEX.csv`](./papers/INDEX.csv) · [`papers/README.md`](./papers/README.md)
 
 ## 6. PYQ PDF links (direct)
 
