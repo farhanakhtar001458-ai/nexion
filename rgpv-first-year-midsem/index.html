@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RGPV 1st Year (AI/ML) — Mid-Sem PYQ Research Guide</title>
+<style>
+  :root{
+    --bg:#0b1020; --bg2:#111832; --card:#161f3d; --card2:#1c2749;
+    --peru:#e4b363; --ink:#e9edf7; --muted:#9aa6c4; --line:#26315a;
+    --green:#4ade80; --red:#fca5a5; --blue:#7dd3fc; --violet:#c4b5fd;
+    --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:radial-gradient(1200px 600px at 10% -10%,#1b2450 0%,transparent 60%),
+    radial-gradient(900px 500px at 110% 0%,#2a1c3f 0%,transparent 55%),var(--bg);
+    color:var(--ink);font:15px/1.6 "Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  }
+  a{color:var(--blue);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1180px;margin:0 auto;padding:22px 16px 70px}
+  header.hero{
+    background:linear-gradient(135deg,#1b2347 0%,#251c45 55%,#101733 100%);
+    border:1px solid var(--line);border-radius:22px;padding:26px 24px;box-shadow:var(--shadow);
+    position:relative;overflow:hidden;
+  }
+  header.hero::after{
+    content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(circle,#e4b36355,transparent 65%);
+  }
+  .kicker{display:inline-flex;gap:8px;align-items:center;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--peru);background:#e4b3631a;border:1px solid #e4b36344;padding:5px 12px;border-radius:999px}
+  h1{margin:14px 0 6px;font-size:clamp(22px,3.4vw,34px);line-height:1.2}
+  h1 span{color:var(--peru)}
+  .sub{color:var(--muted);max-width:820px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:20px}
+  .stat{background:#ffffff0a;border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+  .stat b{display:block;font-size:20px;color:#fff}
+  .stat small{color:var(--muted)}
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 0;align-items:center}
+  input[type=search],select{
+    background:var(--bg2);border:1px solid var(--line);color:var(--ink);border-radius:12px;
+    padding:10px 13px;font-size:14px;min-width:230px;outline:none
+  }
+  input[type=search]:focus,select:focus{border-color:var(--peru)}
+  .btn{
+    background:var(--card2);border:1px solid var(--line);color:var(--ink);border-radius:12px;
+    padding:10px 14px;font-size:14px;cursor:pointer;transition:.15s
+  }
+  .btn:hover{border-color:var(--peru);color:#fff}
+  .btn.primary{background:linear-gradient(135deg,#e4b363,#d99441);color:#1a1405;border:none;font-weight:600}
+  .progress-shell{margin:16px 0 0;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;display:flex;gap:12px;align-items:center;font-size:13px;color:var(--muted)}
+  .bar{flex:1;height:9px;background:#0d142c;border-radius:99px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#4ade80,#22d3ee);transition:width .25s}
+  nav.tabs{position:sticky;top:0;z-index:20;display:flex;gap:8px;overflow-x:auto;padding:12px 0;margin-top:20px;
+    background:linear-gradient(180deg,rgba(11,16,32,.96),rgba(11,16,32,.72));backdrop-filter:blur(6px)}
+  nav.tabs button{
+    white-space:nowrap;background:var(--card);border:1px solid var(--line);color:var(--muted);
+    padding:9px 14px;border-radius:999px;cursor:pointer;font-size:13.5px
+  }
+  nav.tabs button.active{background:linear-gradient(135deg,#e4b363,#d99441);color:#191305;border-color:transparent;font-weight:700}
+  section.subject{display:none}
+  section.subject.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+  .panel h2{margin:0 0 4px;font-size:20px}
+  .panel h3{margin:22px 0 10px;font-size:16px;color:#fff}
+  .pill{display:inline-block;font-size:11.5px;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin-left:8px;vertical-align:middle}
+  .pill.b{background:#7dd3fc1a;border-color:#7dd3fc44;color:#bfe9ff}
+  .pill.a{background:#c4b5fd1a;border-color:#c4b5fd44;color:#ddd6fe}
+  .unit{border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:14px;background:linear-gradient(180deg,#1a2347,#151d3b)}
+  .unit h4{margin:0 0 4px;font-size:16.5px;color:var(--peru)}
+  .unit .hint{font-size:12.5px;color:var(--muted);margin-bottom:10px}
+  ul.q{list-style:none;margin:0;padding:0}
+  ul.q li{
+    display:grid;grid-template-columns:30px 1fr;gap:10px;padding:11px 12px;border-radius:12px;
+    border:1px solid transparent;border-bottom:1px dashed #26315a
+  }
+  ul.q li:hover{background:#ffffff08;border-color:#31406f}
+  ul.q li:last-child{border-bottom:none}
+  .chk{margin-top:3px;width:17px;height:17px;accent-color:#4ade80;cursor:pointer}
+  .qtext{font-size:14.5px}
+  .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px;align-items:center}
+  .yr{font-size:11px;padding:2.5px 8px;border-radius:999px;background:#ffffff0d;border:1px solid var(--line);color:#cbd5f5}
+  .stars{font-size:12px;color:var(--peru);letter-spacing:1px}
+  .tip{font-size:12.5px;color:var(--green);margin-top:6px}
+  .trend{background:#4ade8012;border:1px solid #4ade8033;border-radius:12px;padding:13px 15px;margin-top:16px;font-size:13.8px}
+  .trend b{color:#bbf7d0}
+  .warn{background:#fca5a512;border:1px solid #fca5a533;border-radius:12px;padding:13px 15px;margin-top:16px;font-size:13.8px}
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13.5px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:#ffffff0a;color:#fff;font-weight:600}
+  details{background:#ffffff08;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:10px}
+  details summary{cursor:pointer;font-weight:600;color:#fff;font-size:14px}
+  details ol{margin:10px 0 0;padding-left:22px}
+  details li{margin-bottom:7px;font-size:13.6px}
+  .links{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+  .links a{font-size:12.5px;padding:6px 10px;border-radius:9px;background:#7dd3fc12;border:1px solid #7dd3fc33}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+  .kv{display:grid;grid-template-columns:130px 1fr;gap:6px 12px;font-size:13.6px}
+  .kv div:nth-child(odd){color:var(--muted)}
+  footer{margin-top:26px;color:var(--muted);font-size:12.5px;text-align:center;line-height:1.8}
+  mark{background:#e4b36355;color:#fff;border-radius:4px;padding:0 2px}
+  .noresult{color:var(--muted);font-size:13.5px;padding:10px}
+  @media print{
+    body{background:#fff;color:#000}
+    nav.tabs,.toolbar,.progress-shell,.btn{display:none!important}
+    section.subject{display:block!important}
+    .panel,.unit,.trend,.warn,details{background:#fff;border-color:#bbb;box-shadow:none;color:#000}
+    .qtext,.unit h4,.panel h2{color:#000}
+    a{color:#0645ad}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="kicker">RGPV · Bhopal · B.Tech 1st Year · AI/ML (AIML / AL)</span>
+    <h1>Mid-Sem (MSE) ke liye <span>Previous 5+ Saal</span> ka Question Research</h1>
+    <p class="sub">
+      AIML branch first year me branch-specific paper nahi hota — <b>Sem-1 ke 5 common subjects</b> hote hain
+      (RGPV SET-B: BT-201 Physics, BT-202 Maths-II, BT-203 BME, BT-204 BCEM, BT-205 BCE).
+      Neeche har subject ka <b>Unit 1 + Unit 2</b> (yani typical MSE-1 syllabus) ka repeat-analysis hai —
+      kaunse questions kitni baar aaye, kis saal aaye, aur actual paper me kaise appear hote hain.
+    </p>
+    <div class="stats">
+      <div class="stat"><b>5</b><small>Sem-1 subjects (SET-B / AIML)</small></div>
+      <div class="stat"><b>11</b><small>Papers verbatim analyse kiye (2022 → Jun 2026)</small></div>
+      <div class="stat"><b>2018 → 2026</b><small>Question year-tags ka range</small></div>
+      <div class="stat"><b>70+20+10</b><small>End-sem + Mid-sem + Quiz scheme</small></div>
+    </div>
+
+    <div class="toolbar">
+      <input type="search" id="search" placeholder="Question dhoondo... (jaise: Newton, Bernoulli, Iron-Carbon, OS)" />
+      <button class="btn" id="clear-search">Clear</button>
+      <select id="filter">
+        <option value="all">Sab questions</option>
+        <option value="5">Sirf ★★★★★ (hot repeats)</option>
+        <option value="4">★★★★ aur upar</option>
+        <option value="pending">Jo abhi pending hain</option>
+      </select>
+      <button class="btn" id="reset-progress">Progress reset</button>
+      <button class="btn primary" onclick="window.print()">Print / Save PDF</button>
+    </div>
+
+    <div class="progress-shell">
+      <span>Meri prep:</span>
+      <div class="bar"><i id="pbar"></i></div>
+      <span id="ptext">0 / 0 done</span>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs"></nav>
+
+  <section class="subject active" id="guide">
+    <div class="panel">
+      <h2>Pehle ye samajh lo — Mid-Sem kaise hota hai</h2>
+      <div class="kv" style="margin-top:12px">
+        <div>Total marks</div><div>End-Sem <b>70</b> + Mid-Sem test <b>20</b> + Quiz/Assignment <b>10</b> = <b>100</b> (RGPV scheme, 70-20-10)</div>
+        <div>Mid-sem kitne</div><div>Har subject me <b>kam se kam 2 mid-sem test</b> conduct hote hain (MSE-1, MSE-2). College ke hisaab se best/average count hota hai.</div>
+        <div>MSE-1 syllabus</div><div>Ghar-ghar thoda alag, par lagbhag sab college <b>Unit 1 + Unit 2</b> rakhhte hain. MSE-2 me Unit 3-5.</div>
+        <div>MSE ka paper</div><div>Internal (college) paper — RGPV publish nahi karta. Isliye yahan <b>RGPV end-sem papers (2020-2026)</b> se unit-wise repeat analysis banaya gaya hai, jo MSE ke questions ka sabse sahi predictor hai.</div>
+        <div>Answer length</div><div>MSE me generally 2-3 long (6-8 marks) + short notes aate hain. Derivation + diagram + formula + 1 numerical = full marks.</div>
+        <div>AIML note</div><div>AI/ML ke core papers (AL-304 Artificial Intelligence, AL-405 Machine Learning) <b>3rd-4th sem</b> se shuru hote hain. 1st year me sirf common subjects hain.</div>
+      </div>
+      <div class="warn">
+        <b>SET ka confusion clear kar lo:</b> RGPV first year me do set chhalte hain — SET-A (CS, CSIT, EE, EX) aur SET-B (ME, CE, EC, <b>AIML</b>, CY, IP, AU).
+        AIML SET-B me hai, matlab aapke <b>Sem-1 me Physics group</b> (BT-201/202/203/204/205) hai. Agar aapke college ne AIML ko SET-A me rakha hai to aapke Sem-1 me
+        BT-101 Chemistry, BT-102 Maths-I, BT-103 English, BT-104 BEEE, BT-105 Graphics honge — uske saare paper links bhi guide me diye hain ("Sem-2 / SET-A" tab).
+      </div>
+      <h3>Is guide ko kaise use karo</h3>
+      <ul class="q"><li><span></span><span class="qtext">
+        ⭐ ki ginti = pichhle saalon me kitni baar repeat hua. <b>★★★★★ wale questions non-negotiable hain</b> — 60-70% MSE unhi se banta hai.
+        <br>Checkbox lagao (browser me save rehta hai) aur toolbar ke filter se "pending" dekho.
+      </span></li></ul>
+    </div>
+  </section>
+
+  <section class="subject" id="plan">
+    <div class="panel">
+      <h2>7-Din Study Plan (Mid-Sem ke liye)</h2>
+      <table>
+        <tr><th>Din</th><th>Kaam</th><th>Time</th></tr>
+        <tr><td>Day 1</td><td>BT-202 Maths-II → Unit 1 (linear, Bernoulli, homogeneous) ke 10 questions solve karo. Variation of parameters ka method rat lo (har saal aata hai).</td><td>2.5 hr</td></tr>
+        <tr><td>Day 2</td><td>BT-201 Physics → Unit 1: Uncertainty principle, TISE, particle in box ke derivations likho (likh ke, padh ke nahi).</td><td>3 hr</td></tr>
+        <tr><td>Day 3</td><td>BT-201 Physics → Unit 2: Newton's rings + Michelson + grating ke numericals. Ye 3 topics = U2 ka 80%.</td><td>2.5 hr</td></tr>
+        <tr><td>Day 4</td><td>BT-205 BCE → Unit 1 (OS functions, computer organization, classification) + Unit 2 (algorithm/flowchart, POP vs OOP, C++ structure).</td><td>2.5 hr</td></tr>
+        <tr><td>Day 5</td><td>BT-203 BME → Unit 1: Iron-Carbon diagram 3 baar draw karo. Unit 2: lathe parts + temperature instruments diagrams.</td><td>2.5 hr</td></tr>
+        <tr><td>Day 6</td><td>BT-204 BCEM → Unit 1: cement/bricks/stones + footing types. Unit 2: levelling numericals (HI + Rise-Fall) + theodolite.</td><td>2.5 hr</td></tr>
+        <tr><td>Day 7</td><td>Poore guide ke ★★★★★ questions ko blank page pe 1-1 page me answer karo. Jo bhool jao, sirf wahi revise.</td><td>3 hr</td></tr>
+      </table>
+      <h3>Must-memorize "sure-shot" list (sabse zyada repeat)</h3>
+      <div class="grid2">
+        <div class="unit"><h4>Derivations / Numericals</h4>
+          <ul class="q"><li><span></span><span class="qtext">
+          Uncertainty principle (gamma-ray microscope) · TISE + particle in 1-D box (energy eigenvalues) · Newton's rings numerical · Grating resolving power · NA &amp; acceptance angle of fiber · Variation of parameters (y''+y = tan x / cosec x) · Cauchy–Euler equation · Levelling by HI &amp; Rise-Fall method · Fe-Fe<sub>3</sub>C diagram phases · Bernoulli equation derivation.
+          </span></li></ul>
+        </div>
+        <div class="unit"><h4>Theory/Short notes jo roz aate hain</h4>
+          <ul class="q"><li><span></span><span class="qtext">
+          Physical significance of wave function · Rayleigh criterion · Michelson interferometer working · Optical pyrometer · Vernier calliper / sine bar / slip gauge · Functions of OS · System vs application software · OOP characteristics &amp; POP vs OOP · Types of inheritance · Cement tests &amp; bricks properties · Stone masonry types · Theodolite parts · Remote sensing applications.
+          </span></li></ul>
+        </div>
+      </div>
+      <h3>Common galtiyan (jisme marks katte hain)</h3>
+      <ul class="q">
+        <li><span></span><span class="qtext">Derivation ka <b>diagram + assumption</b> chhod dena — RGPV me diagram ke bina aadhe marks jaate hain.</span></li>
+        <li><span></span><span class="qtext">Maths me <b>arbitrary constants</b> (c1, c2) aur "Hence proved" line na likhna.</span></li>
+        <li><span></span><span class="qtext">Physics numerical me <b>units</b> (nm, Å, eV) convert na karna.</span></li>
+        <li><span></span><span class="qtext">BCEM levelling numerical me <b>arithmetic check</b> (ΣBS − ΣFS = ΣRise − ΣFall = Last RL − First RL) na likhna — ye ek mark pakka.</span></li>
+        <li><span></span><span class="qtext">BCE me C++ program me <b>#include&lt;iostream.h&gt;</b> / syntax galat likhna.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="subject" id="subject-host"></section>
+
+  <section class="subject" id="seta">
+    <div class="panel">
+      <h2>Sem-2 / SET-A subjects (BT-101 se BT-105) <span class="pill a">AIML ke liye Sem-2</span></h2>
+      <p class="sub">Agar aapke college me AIML SET-A me hai, ya aap Sem-2 ki tayyari abhi se dekh rahe ho — ye subjects honge.
+      Inke previous year papers ke direct PDF links neeche hain (2020 → Jun 2026). Unit-wise repeat-analysis ke liye
+      subject ka "Important Questions" page kholo.</p>
+      <div id="seta-links"></div>
+      <div class="warn" style="margin-top:16px">
+        <b>Priority:</b> Sem-2 me sabse zyada <b>BT-102 Maths-I</b> (calculus: Rolle's/Lagrange's MVT, Taylor/Maclaurin, maxima-minima, Fourier series) aur
+        <b>BT-104 BEEE</b> time lete hain. BT-103 English aur BT-105 Engineering Graphics me scoring easy hai.
+      </div>
+    </div>
+  </section>
+
+  <section class="subject" id="sources">
+    <div class="panel">
+      <h2>Sources &amp; Method (research transparency)</h2>
+      <ol style="font-size:13.8px;line-height:1.9;padding-left:22px">
+        <li><b>Verbatim questions (2024-2026):</b> RGPV ke asli question-paper PDFs se seedha extract kiye gaye —
+          Jun 2026, Dec 2025, Jun 2025, Jun 2024, Nov 2022 papers (har subject ke). Mirrors: <a href="https://www.rgpvonline.com/rgpv-first-year.html" target="_blank" rel="noopener">rgpvonline.com — ALL Branch 1st Year</a>.</li>
+        <li><b>2018-2023 ke year-tags:</b> RGPV unit-wise "Important Questions" compilations —
+          <a href="https://career-shiksha.com/post/important-rgpv-question-bt-201-engineering-physics-1styear/" target="_blank" rel="noopener">BT-201</a>,
+          <a href="https://career-shiksha.com/post/important-rgpv-question-bt-203-basic-mechanical-engineering-1st-year/" target="_blank" rel="noopener">BT-203</a>,
+          <a href="https://career-shiksha.com/post/important-rgpv-question-bt-205-basic-computer-engineering-1st-year/" target="_blank" rel="noopener">BT-205</a>,
+          aur <a href="https://www.studocu.com/in/document/rajiv-gandhi-proudyogiki-vishwavidyalaya/basic-computer-engg/bce-computer-imp-important-privious-years-important-questions/101697818" target="_blank" rel="noopener">BT-205 (unit-wise, year-tagged)</a>.</li>
+        <li><b>Syllabus/unit mapping:</b> AICTE flexible-curricula scheme —
+          <a href="https://www.rgpvnotes.in/btech/grading-system-old/qp/2018/12/basic-civil-engineering-mechanics-bt-204" target="_blank" rel="noopener">BT-204 syllabus</a>,
+          <a href="https://career-shiksha.com/post/syllabus-of-i-year-all-branch-all-subjects-rgpv/" target="_blank" rel="noopener">1st year sab subjects ka syllabus</a>.</li>
+        <li><b>Exam scheme (70+20+10, minimum 2 MSE):</b> RGPV scheme of examination / grading-system rules.</li>
+        <li><b>Branch-set mapping (AIML = SET-B):</b> RGPV first-year scheme + subject-wise important-question index pages.</li>
+      </ol>
+      <p class="sub" style="margin-top:14px">Ye unofficial community resource hai — PYQ PDFs RGPV ke official nahi, student-shared mirrors hain.
+      Koi link khule na khule to <a href="https://www.rgpvonline.com/rgpv-first-year.html" target="_blank" rel="noopener">index page</a> se manually subject + year choose kar lena.</p>
+    </div>
+  </section>
+
+  <footer>
+    Banaya gaya RGPV ke public question-paper archives par research karke · AIML / AL branch · Last updated: Oct 2026<br>
+    Padhai se pehle apne college ka MSE syllabus/circular ek baar check kar lena — units aur marks distribution college se college badalte hain.
+  </footer>
+</div>
+
+<script>
+/* ---------------- LINK BUILDERS ---------------- */
+const MIRROR = "https://www.rgpvonline.com/be/";
+const pdf  = s => MIRROR + s + ".pdf";
+const page = s => MIRROR + s + ".html";
+
+/* ---------------- SUBJECT DATA ---------------- */
+const SUBJECTS = [
+{
+  id:"bt201", code:"BT-201", name:"Engineering Physics",
+  set:"SET-B · Sem-1 · AIML", paper:"70 marks, attempt any 5 of 8",
+  trends:"2025-26 ke papers me Physics ka <b>Q1 hamesha Unit-1 ka</b> (wave nature + TISE + 1-D box) ban gaya hai, aur usme ek <b>numerical part pakka</b> hai (particle-in-box energy, Newton's ring diameter, NA of fiber). Unit-2 me Newton's rings + Michelson + grating resolving power ki teen-tanki lagti hai.",
+  units:[
+   { t:"Unit 1 · Wave Nature of Particles & the Schrödinger Equation",
+     hint:"Ye unit physics ka sabse scoring hai — derivations fix hain, wahi 5 sawaal ghoom-ghoom ke aate hain.",
+     qs:[
+      {s:5, y:["Dec 2022","Jun 2022","May 2019","Nov 2018","2017","2012","Dec 2025"],
+       q:"State Heisenberg's uncertainty principle and derive it for the hypothetical gamma-ray microscope.",
+       tip:"Statement (Δx·Δp ≥ ħ/2) + gamma-ray microscope derivation — ye MSE me bhi top question hota hai."},
+      {s:5, y:["Dec 2022","Jun 2022","Jun 2020","May 2018","Jun 2011","Jun 2026","Dec 2025"],
+       q:"Derive the time-independent Schrödinger wave equation for a particle (time-dependent variant bhi poochi jati hai).",
+       tip:"Dono versions likh ke practice karo — paper me 'state + obtain' ka mix aata hai."},
+      {s:5, y:["Jun 2022","Jun 2020","Jun 2026","Dec 2025"],
+       q:"Particle in a one-dimensional box — energy eigenvalues aur wave function derive karo.",
+       tip:"Numerical bhi pakka: 'mass 9.11×10⁻³¹ kg, width 10 nm, first three excited states ki energy nikalo' (Dec 2025 me exactly yahi aaya). En = n²h²/8ma² yaad rakho."},
+      {s:4, y:["Dec 2022","Jun 2020","Dec 2025"],
+       q:"Deduce the relation between phase velocity and group velocity (vp, vg) for a free particle.",
+       tip:"Dec 2025 me uncertainty principle ke saath isi ka combo aaya tha."},
+      {s:3, y:["Jun 2022","Dec 2022"],
+       q:"Discuss the physical significance of the wave function / Born interpretation. (short note)",
+       tip:"Short note me 5-6 points + normalization condition — 3-4 marks ka pakka sawaal."},
+      {s:3, y:["Nov 2018","May 2018","Dec 2017","Dec 2016"],
+       q:"Derive the expression for Compton shift in Compton scattering (wavelength of scattered photon nikalna).",
+       tip:"Purane papers ka favourite; abhi bhi short note ke roop me aa jata hai."},
+      {s:2, y:["Dec 2025","Jun 2015","Dec 2010"],
+       q:"Explain the wave nature of particles / de Broglie hypothesis of matter waves and its verification.",
+       tip:"Dec 2025 me 'wave nature of particles' ke naam se wapas aaya."},
+      {s:1, y:["Jun 2020"],
+       q:"Give the expression for the momentum operator and explain the operators used in quantum mechanics.",
+       tip:"Chhota sawaal — 2-3 marks."}
+     ]},
+   { t:"Unit 2 · Wave Optics",
+     hint:"Ye unit numerical-heavy hai. Interference + diffraction + resolving power — teeno se ek-ek question aata hai.",
+     qs:[
+      {s:5, y:["Dec 2020","Nov 2018","May 2018","May 2019","Jun 2020","Jun 2022","Dec 2022","Dec 2025"],
+       q:"Newton's rings: formation explain karo, dark & bright fringe diameters ke expressions derive karo, wavelength nikalo.",
+       tip:"Numericals yaad karlo: (a) 4th & 12th dark ring 0.400 cm / 0.700 cm → 20th dark ring. (b) 10th dark ring 0.50 cm, λ = 6000 Å → lens ki radius of curvature + film thickness. (c) Dec 2025 me naya variant: Newton's rings se liquid ka refractive index nikalna."},
+      {s:5, y:["Jun 2022","Dec 2020","May 2019","Dec 2025"],
+       q:"Michelson interferometer — construction & working, aur mirror displacement se fringe shift ka expression.",
+       tip:"Diagram 3 baar draw karo. Dec 2025 me isi ke saath fringe-shift derivation poocha gaya tha."},
+      {s:5, y:["Dec 2022","Nov 2018","Dec 2015","Jun 2017","Dec 2012","Dec 2025"],
+       q:"Plane transmission grating — theory, resolving power ka expression; resolving power aur dispersive power ka relation.",
+       tip:"Dec 2022 me numerical bhi aaya: 4250 lines/cm, 2nd order line 30° par → sodium light ka wavelength."},
+      {s:4, y:["Jun 2020","Dec 2025"],
+       q:"Fraunhofer diffraction at a single slit — explain karo; subsidiary maxima ki intensity (4.5% of principal maximum) show karo.",
+       tip:"Dec 2025 me literally 4.5% wala part poocha gaya tha."},
+      {s:3, y:["Nov 2018","Jun 2017","Dec 2010","Jun 2010"],
+       q:"Interference of light: superposition, constructive/destructive, division of amplitude vs division of wavefront, Fresnel's biprism.",
+       tip:"Fresnel's biprism ka diagram + fringe-width formula yaad rakho."},
+      {s:3, y:["Nov 2018","2007"],
+       q:"Rayleigh criterion of resolution; resolving power of telescope/microscope/grating.",
+       tip:"Formula + 'two sources just resolved' wali definition likhna."},
+      {s:2, y:["Dec 2022"],
+       q:"Mach-Zehnder interferometer — construction and working.",
+       tip:"Kam baar aaya hai par paper me chhupa hua aa jata hai (Dec 2022)."},
+      {s:2, y:["Jun 2022"],
+       q:"Write a note on different types of polarization in dielectric materials.",
+       tip:"Short note — polarizability ke types include karo."}
+     ]}
+  ],
+  papers:["bt-201-engineering-physics-jun-2026","bt-201-engineering-physics-dec-2025","bt-201-engineering-physics-jun-2025",
+          "bt-201-engineering-physics-dec-2024","bt-201-engineering-physics-jun-2024","bt-201-engineering-physics-dec-2023",
+          "bt-201-engineering-physics-jun-2023","bt-201-engineering-physics-nov-2022","bt-201-engineering-physics-jun-2022",
+          "bt-201-engineering-physics-dec-2020","bt-201-engineering-physics-jun-2020"],
+  verbatim:[
+   {label:"June 2026", slug:"bt-201-engineering-physics-jun-2026",
+    u12:["Q1(a) Explain the Particle in a One-Dimensional Box and derive the expressions for the energy eigen values and eigen functions.",
+         "Q1(b) Derive the Time-Independent Schrödinger Equation."],
+    rest:"Baaki paper: U3 — Fermi energy/level in intrinsic & extrinsic semiconductors; U4 — CO₂ laser construction & working, properties of laser beams (monochromaticity, coherence, directionality, brightness), optical fiber acceptance angle & NA derivation; U5 — Gauss's divergence theorem, electric field due to continuous charge distribution, continuity equation, V-number, Kronig-Penney model, grating equation (short notes)."},
+   {label:"December 2025", slug:"bt-201-engineering-physics-dec-2025",
+    u12:["Q1(a) Explain the wave nature of particles. Derive the time-independent Schrödinger equation for a particle in one-dimensional potential box and write its wavefunction.",
+         "Q1(b) Numerical: particle of mass 9.11×10⁻³¹ kg in a 10 nm box — first three excited states ki energy nikaalo.",
+         "Q2(a) Newton's ring experiment se liquid ka refractive index kaise nikalte hain?",
+         "Q2(b) Rayleigh criterion of resolution; plane transmission grating ki resolving power + resolving vs dispersive power ka relation.",
+         "Q6(a) Discuss the uncertainty principle. Derive relation between group velocity and phase velocity.",
+         "Q6(b) Numerical: core/cladding RI 1.55 & 1.50 → NA, acceptance angle, critical angle, acceptance cone.",
+         "Q7(a) Acceptance angle & acceptance cone of optical fiber — derivation.",
+         "Q7(b) Fraunhofer diffraction at single slit — first subsidiary maximum 4.5% show karo.",
+         "Q8(a) Numerical: 10th dark ring diameter 0.50 cm, λ = 6000 Å → lens radius of curvature & film thickness.",
+         "Q8(b) Michelson interferometer + fringe shift due to mirror displacement."],
+    rest:"U3: Hall effect + Hall voltage; Fermi level, density of states, Bloch's theorem. U4/U5: Einstein coefficients (A & B) + population inversion; He-Ne laser; Poynting theorem; Maxwell's equations in vacuum."}
+  ]
+},
+{
+  id:"bt202", code:"BT-202", name:"Mathematics-II",
+  set:"SET-B · Sem-1 · AIML", paper:"70 marks, attempt any 5 of 8",
+  trends:"Maths-II me <b>pattern almost fixed</b> hai: Q1 = first-order ODE (Unit 1), Q2-3 = higher-order ODE + variation of parameters + series solution (Unit 2). <b>'Variation of parameters' 3 saal se har paper me hai</b> — kabhi tan x, kabhi cosec x ke saath. Cauchy-Euler (x²y'' …) bhi har saal.",
+  units:[
+   { t:"Unit 1 · Ordinary Differential Equations-I (first order)",
+     hint:"Yahan 3-4 standard types hi ghoomte hain: linear (IF), Bernoulli, homogeneous/reducible, exact.",
+     qs:[
+      {s:5, y:["Dec 2025","Jun 2026","Jun 2025"],
+       q:"Linear differential equation: dy/dx + P(x)y = Q(x) solve karo (integrating factor method).",
+       tip:"Dec 2025: (1+y²)dx = (tan⁻¹y − x)dy — y ko variable maan ke linear banao. Jun 2026: dy/dx − y sin 2x = cot x."},
+      {s:5, y:["Jun 2026"],
+       q:"Bernoulli's equation solve karo (reducible to linear form).",
+       tip:"Jun 2026: dy/dx + y tan x = y² sec x — divide by y² karke v = 1/y substitute karo."},
+      {s:4, y:["Jun 2026","Jun 2025"],
+       q:"Homogeneous / variable-separable first order equation solve karo.",
+       tip:"Jun 2026: (y²+xy)dx + x²dy = 0. Jun 2025: (eʸ+1)cos x dx + eʸ sin x dy = 0."},
+      {s:3, y:["recent pattern"],
+       q:"Equations of first order but not of first degree (solvable for p/x/y, Clairaut's form) aur exact equations / integrating factors.",
+       tip:"Jab paper me 8 me se choice hoti hai, tab ye backup question bank hai — formula sheet bana lo."},
+      {s:3, y:["recent pattern"],
+       q:"Orthogonal trajectories & applications of first-order ODEs (growth/decay, simple electric circuit).",
+       tip:"Short Answer type me aa jata hai."}
+     ]},
+   { t:"Unit 2 · Ordinary Differential Equations-II (higher order)",
+     hint:"Ye unit 'rat ke jaise' hai — 3-4 fixed ques types. Ratta maar ke bhi full marks aa sakte hain.",
+     qs:[
+      {s:5, y:["Jun 2025","Jun 2026","Dec 2025"],
+       q:"Method of variation of parameters se solve karo.",
+       tip:"Exactly ye equations practice karo: y'' + y = tan x (Dec 2025), y'' + y = cosec x (Jun 2026), (D²+a²)y = tan ax (Jun 2025). Yeh 'repeated trio' hai."},
+      {s:5, y:["Jun 2025","Jun 2026","Dec 2025"],
+       q:"Cauchy–Euler / reducible-to-homogeneous equation solve karo.",
+       tip:"Dec 2025: (1+x)²y'' + (1+x)y' + y = 4cos{log(1+x)}. Jun 2026: (x+1)²y'' + (x+1)y' + y = 2sin(log(x+1)). Jun 2025: x²y'' + 5xy' + 4y = x log x. Substitution x = eᶻ ya (1+x) = eᶻ."},
+      {s:4, y:["Jun 2025","Dec 2025"],
+       q:"Complementary function + particular integral (symbolic / operator method) se solve karo.",
+       tip:"Jun 2025: (D² − 5D + 6)y = 4eˣ + 5. Jun 2026: (D² + 2)y = eˣ cos x — eˣcos x wala PI type rat lo."},
+      {s:4, y:["Dec 2025","Jun 2025"],
+       q:"Series solution of second-order ODE (Frobenius method) / Legendre's equation.",
+       tip:"Dec 2025: xy'' + y' + xy = 0 about x = 0 (Frobenius). Jun 2025: Legendre's equation in series. Naya favourite topic hai."},
+      {s:3, y:["Dec 2025"],
+       q:"Simultaneous differential equations solve karo (dx/dt, dy/dt wale).",
+       tip:"Dec 2025 Q1(b): d²x/dt² − 4dx/dt + 4x = y aur d²y/dt² + 4dy/dt + 4y = 25x + 16eᵗ."},
+      {s:3, y:["Jun 2026","older"],
+       q:"Bessel's function identities — J₁/₂(x) = √(2/πx)·sin x prove karo; recurrence relations.",
+       tip:"Jun 2026 me directly aaya tha."},
+      {s:2, y:["recent pattern"],
+       q:"Total differential equations / exact differential equations of second order.",
+       tip:"Backup question — formula sheet ready rakho."}
+     ]}
+  ],
+  papers:["bt-202-mathematics-2-jun-2026","bt-202-mathematics-2-dec-2025","bt-202-mathematics-2-jun-2025",
+          "bt-202-mathematics-2-dec-2024","bt-202-mathematics-2-jun-2024","bt-202-mathematics-2-dec-2023",
+          "bt-202-mathematics-2-jun-2023","bt-202-mathematics-2-nov-2022","bt-202-mathematics-2-jun-2022",
+          "bt-202-mathematics-2-jun-2020"],
+  verbatim:[
+   {label:"June 2026", slug:"bt-202-mathematics-2-jun-2026",
+    u12:["Q1(a) Solve (y² + xy)dx + x²dy = 0.",
+         "Q1(b) Solve dy/dx + y tan x = y² sec x.",
+         "Q2(a) Solve dy/dx − y sin 2x = cot x.",
+         "Q2(b) Solve (D² + 2)y = eˣ cos x.",
+         "Q3(a) Apply the method of variation of parameters to solve d²y/dx² + y = cosec x.",
+         "Q3(b) Prove that J₁/₂(x) = √(2/πx)·sin x.",
+         "Q4(a) Solve (x+1)²y'' + (x+1)y' + y = 2sin(log(x+1))."],
+    rest:"U3: Charpit's method (px + qy = pq). U4: harmonic function + harmonic conjugate; analytic function ki condition (value of p). U5: Cauchy's integral theorem, poles & residues, grad/div/curl, directional derivative."},
+   {label:"December 2025", slug:"bt-202-mathematics-2-dec-2025",
+    u12:["Q1(a) Solve (1 + y²)dx = (tan⁻¹y − x)dy.",
+         "Q1(b) Solve simultaneous equations: d²x/dt² − 4dx/dt + 4x = y and d²y/dt² + 4dy/dt + 4y = 25x + 16eᵗ.",
+         "Q2(a) Frobenius method se xy'' + y' + xy = 0 ka series solution (about x = 0).",
+         "Q2(b) Variation of parameters se d²y/dx² + y = tan x solve karo.",
+         "Q8(b) Reducible-to-homogeneous: (1+x)²y'' + (1+x)y' + y = 4cos{log(1+x)}."],
+    rest:"U3: (D² − 2DD' + D'²)Z = e^{x+2y} + x²; complete integral of px + qy = pq. U4: harmonic function u = eˣ(x cos y − y sin y) + conjugate; Cauchy's integral formula. U5: directional derivative, line integral, Stokes' theorem, residue theorem, ∫dθ/(5−3cosθ)."},
+   {label:"June 2025", slug:"bt-202-mathematics-2-jun-2025",
+    u12:["Q1(a) Solve (eʸ + 1)cos x dx + eʸ sin x dy = 0.",
+         "Q1(b) Solve (D² − 5D + 6)y = 4eˣ + 5.",
+         "Q2(a) Solve x²y'' + 5xy' + 4y = x log x.",
+         "Q2(b) Series solution of Legendre's differential equation.",
+         "Q3. Variation of parameters se (D² + a²)y = tan ax solve karo."],
+    rest:"U3: Lagrange's method (y+z)p + (x+z)q = x+y; arbitrary function eliminate karna; PDE ∂²z/∂x² − ∂²z/∂y² = x²y. U4: analytic function (find K); complex integration; residues. U5: irrotational proof; work done by force along a curve."}
+  ]
+},
+{
+  id:"bt203", code:"BT-203", name:"Basic Mechanical Engineering",
+  set:"SET-B · Sem-1 · AIML", paper:"70 marks, attempt any 5 of 8",
+  trends:"BME me <b>Iron-Carbon diagram = guarantee</b> (2024, 2025, 2026 — teeno me Unit-1 ka pehla question). Unit-2 me <b>lathe machine parts</b> aur <b>temperature measurement instruments</b> ki jodi har saal aati hai. 2025 ke baad numericals (stress-strain, boiler efficiency, viscosity) badh gaye hain.",
+  units:[
+   { t:"Unit 1 · Materials",
+     hint:"Unit-1 ka 70% Iron-Carbon diagram, cast iron aur mechanical properties se hi banta hai.",
+     qs:[
+      {s:5, y:["Jun 2024","Jun 2026","Dec 2025","Nov 2022"],
+       q:"Iron–Carbon / Fe-Fe₃C equilibrium diagram — saare phases, invariant reactions aur critical temperatures explain karo (diagram ke saath).",
+       tip:"Jun 2024: 'Draw Fe-Fe₃C phase diagram and explain phase transformation reactions.' Ye drawing 3 baar practice karo — 7-8 marks fixed."},
+      {s:4, y:["Jun 2026","Nov 2022","Dec 2025"],
+       q:"Cast iron — composition, classification aur properties; / Alloy steel & alloying elements ka effect on steel properties; alloys ke applications.",
+       tip:"Dec 2025: 'Define alloy steel, explain effect of alloying elements.' Jun 2026: cast iron composition + classification."},
+      {s:4, y:["Jun 2024","Nov 2022","Dec 2025"],
+       q:"Mechanical properties of materials — strength, hardness, toughness, ductility, brittleness, malleability define karo; hardness measure karne ke methods.",
+       tip:"Definition + ek-ek example (2 lines each) = poore marks."},
+      {s:4, y:["Jun 2024","Dec 2025","Nov 2022"],
+       q:"Stress–strain curve of ductile material — typical shape, yield point aur ultimate tensile strength ka significance.",
+       tip:"Graph draw karna compulsory. Nov 2022 me isi ka numerical tha: 200 cm rod, 3 cm dia, 30 kN pull → stress, strain, elongation."},
+      {s:3, y:["Jun 2026","Nov 2022"],
+       q:"Hooke's law + modulus of elasticity derive karo; classification of engineering materials.",
+       tip:"Jun 2026 Q2(a) me directly 'Derive Hooke's Law and explain modulus of elasticity' aaya tha."},
+      {s:2, y:["Nov 2022"],
+       q:"Numerical: viscosity wala shear force & power problem (flat plate, 1.5×10⁶ mm², 0.4 m/s, 1 poise).",
+       tip:"Formula τ = μ·(du/dy) aur P = F·v yaad rakho."}
+     ]},
+   { t:"Unit 2 · Measurement & Production Engineering",
+     hint:"Do diagrams ratt lo — lathe machine aur optical pyrometer. Isi se Unit-2 ke 2 long questions ban jate hain.",
+     qs:[
+      {s:5, y:["Nov 2022","Jun 2024","Jun 2026","Dec 2025"],
+       q:"Lathe machine — main parts neat sketch ke saath, aur lathe operations (turning, facing, threading, knurling) explain karo.",
+       tip:"4 me se 3 papers me aaya hai. Diagram ke labels: bed, headstock, tailstock, carriage, saddle, tool post."},
+      {s:5, y:["Nov 2022","Jun 2024","Jun 2026","Dec 2025"],
+       q:"Temperature measuring instruments — list + kisi ek (optical pyrometer) ka working principle.",
+       tip:"List: thermometer, thermocouple, RTD, bimetallic strip, pyrometer. Optical pyrometer ka diagram pakka."},
+      {s:3, y:["Jun 2024"],
+       q:"Measurement me errors ke types (systematic, random, gross) explain karo.",
+       tip:"Short-answer favourite."},
+      {s:4, y:["Nov 2022","Jun 2024","Jun 2026"],
+       q:"Vernier calliper se measurement process (least count + reading); sine bar, slip gauge, dial gauge, combination set ke short notes.",
+       tip:"Jun 2026 Q3(a) me 'construction, working principle, least count and applications of Vernier callipers' aaya tha."},
+      {s:2, y:["Nov 2022"],
+       q:"Manometer se pressure measurement; absolute vs gauge vs vacuum pressure ka relation.",
+       tip:"Formula: P_abs = P_gauge + P_atm."},
+      {s:2, y:["Nov 2022"],
+       q:"Welding defects ka short note.",
+       tip:"List + 3-4 defects explain karo (porosity, slag inclusion, undercut, crack)."}
+     ]}
+  ],
+  papers:["bt-203-basic-mechanical-engineering-jun-2026","bt-203-basic-mechanical-engineering-dec-2025",
+          "bt-203-basic-mechanical-engineering-jun-2025","bt-203-basic-mechanical-engineering-dec-2024",
+          "bt-203-basic-mechanical-engineering-jun-2024","bt-203-basic-mechanical-engineering-dec-2023",
+          "bt-203-basic-mechanical-engineering-jun-2023","bt-203-basic-mechanical-engineering-nov-2022",
+          "bt-203-basic-mechanical-engineering-jun-2022","bt-203-basic-mechanical-engineering-dec-2020",
+          "bt-203-basic-mechanical-engineering-jun-2020"],
+  verbatim:[
+   {label:"June 2026", slug:"bt-203-basic-mechanical-engineering-jun-2026",
+    u12:["Q1(a) Explain the Iron–Carbon equilibrium diagram in detail. Discuss all phases, invariant reactions and critical temperatures.",
+         "Q1(b) Describe the composition, classification, and properties of cast irons.",
+         "Q2(a) Derive Hooke's Law and explain the concept of modulus of elasticity.",
+         "Q2(b) Explain various methods of temperature measurement.",
+         "Q3(a) Explain the construction, working principle, least count, and applications of Vernier callipers.",
+         "Q3(b) Explain the constructional features and working principle of a centre lathe."],
+    rest:"U3: hydraulic turbines classification, impulse vs reaction; pumps. U4: Bernoulli equation derivation + assumptions; thermodynamic system types; Zeroth law; boilers classification; steam engine; 2-stroke diesel vs petrol. Short notes: compressors, alloy steels, sine-bar, draught."},
+   {label:"December 2025", slug:"bt-203-basic-mechanical-engineering-dec-2025",
+    u12:["Q1(a) Define alloy steel. Explain the effect of alloying elements on steel properties.",
+         "Q1(b) Describe important phases and critical points in the Iron–Carbon diagram with the help of sketch.",
+         "Q2(a) Define lathe. Explain the main parts of a lathe machine with neat sketch.",
+         "Q2(b) List the different types of temperature measuring instruments. Also explain the working of optical pyrometer."],
+    rest:"U3/U4: Diesel cycle + efficiency; four-stroke petrol engine; Bernoulli + physical significance; reciprocating pump; draught; second law statements; tensile testing & stress-strain; compressor; boiler classification; viscosity/Newton's law."},
+   {label:"June 2024", slug:"bt-203-basic-mechanical-engineering-jun-2024",
+    u12:["Q1(a) Draw Fe-Fe₃C phase diagram and explain the phase transformation reactions.",
+         "Q1(b) Define mechanical properties: strength, hardness, toughness, ductility, brittleness, malleability.",
+         "Q2(a) Stress-strain curve of ductile material — shape, yield point, ultimate tensile strength.",
+         "Q2(b) State and explain various types of errors in measurements.",
+         "Q3(a) Lathe operations list + explain some in detail.",
+         "Q3(b) Temperature measuring instruments + any two explain with diagram."],
+    rest:"U3: hydraulic pumps classification; Bernoulli derivation; Pascal's law. U4: boilers classification; draught; thermodynamic processes; Carnot cycle + efficiency; compressor; 2-stroke petrol engine; slip gauge/sine-bar/combination set."},
+   {label:"November 2022", slug:"bt-203-basic-mechanical-engineering-nov-2022",
+    u12:["Q1(a) Explain the methods to measure the hardness of materials (with numerical on viscosity).",
+         "Q2(a) Classify engineering materials. Alloys kya hote hain + applications.",
+         "Q2(b) Numerical: 200 cm rod, 3.0 cm dia, 30 kN axial pull, E = 2×10⁵ N/mm² → stress, strain, elongation.",
+         "Q3(a) Lathe machine ke main parts + any two operations.",
+         "Q4(b) Vernier calliper se measurement process with neat sketch."],
+    rest:"U4/U5: boiler trial numerical (efficiency, equivalent evaporation); manometer; viscosity importance; externally vs internally fired boilers; Pelton wheel; Otto cycle efficiency; Zeroth law; 4-stroke diesel engine; short notes (welding defects, dial gauge, sine bar, thermodynamic properties)."}
+  ]
+},
+{
+  id:"bt204", code:"BT-204", name:"Basic Civil Engg. & Mechanics",
+  set:"SET-B · Sem-1 · AIML", paper:"70 marks, attempt any 5 of 8",
+  trends:"BCEM me <b>Unit-1 = building materials</b> (cement, bricks, stones, mortar, footings) aur <b>Unit-2 = surveying</b> (theodolite, levelling, contouring). <b>Levelling numerical har saal</b> — HI method ya Rise &amp; Fall method. Remote sensing ka sawaal 2022, 2025, 2026 — teeno me aaya hai.",
+  units:[
+   { t:"Unit 1 · Building Materials & Construction",
+     hint:"Cement, bricks, stones — teeno ke properties + tests + uses. Sath me footings aur masonry.",
+     qs:[
+      {s:4, y:["Jun 2026","Nov 2022"],
+       q:"Cement — properties, laboratory tests aur engineering applications; concrete ki quality par inka effect.",
+       tip:"Jun 2026 Q1(a) me exactly ye aaya. Tests: fineness, soundness, setting time, compressive strength."},
+      {s:4, y:["Jun 2026","Jun 2025","Nov 2022"],
+       q:"Stones aur bricks — types, properties, tests aur building construction me uses (stone ka classification bhi).",
+       tip:"Jun 2025: stones ki characteristics + testing methods; Jun 2026: bricks & stones types/properties/uses."},
+      {s:3, y:["Jun 2025"],
+       q:"Brick masonry construction ke general principles.",
+       tip:"Bonds (stretcher, header, English, Flemish) + 5-6 principles likhna."},
+      {s:3, y:["Jun 2025","Nov 2022"],
+       q:"Stone masonry ke types — typical sketches ke saath (rubble, ashlar etc.).",
+       tip:"Diagram-based question, sketch banane ki practice karo."},
+      {s:3, y:["Jun 2025","Nov 2022"],
+       q:"Mortar kya hai + mortar requirement ki estimation; concrete ke physical & chemical properties.",
+       tip:"1:4, 1:6 nominal proportions likhna."},
+      {s:3, y:["Jun 2026","Jun 2025","Nov 2022"],
+       q:"Foundations — conventional spread footing aur RCC footing (construction + suitability, sketches); doors/windows aur staircases ke types.",
+       tip:"Jun 2026 Q2(a) footings par tha, Jun 2025 me windows, Nov 2022 me staircases."},
+      {s:2, y:["Jun 2026"],
+       q:"Plastering aur pointing ka short note.",
+       tip:"Difference table + purpose likhna."}
+     ]},
+   { t:"Unit 2 · Surveying & Positioning",
+     hint:"Numericals 100% aate hain (levelling). Theodolite ka diagram + contouring theory pakka karo.",
+     qs:[
+      {s:5, y:["Nov 2022","Jun 2026"],
+       q:"Levelling numerical — Height of Instrument (HI) method ya Rise & Fall method se RL nikaalo + arithmetic check.",
+       tip:"Jun 2026: B.S. = 1.425 m, F.S. = 2.165 m, BM ka RL = 100.000 m → HI method se next point ka RL. Nov 2022 me 12 consecutive readings ka poora table banwana tha (Rise & Fall, instrument 4th & 8th reading ke baad shift)."},
+      {s:4, y:["Nov 2022","Jun 2026"],
+       q:"Theodolite — individual components ka diagram, principle, classification, applications; electronic surveying instruments.",
+       tip:"Diagram me: telescope, vertical circle, horizontal circle, levelling head, tripod, vernier."},
+      {s:3, y:["Nov 2022","Jun 2026"],
+       q:"Contouring — principle aur contour map ke uses; contour line, contour interval, horizontal equivalent.",
+       tip:"Definition + 4-5 applications (roads, dams, drainage, site selection)."},
+      {s:4, y:["Nov 2022","Jun 2025","Jun 2026"],
+       q:"Remote sensing — principle aur civil engineering me applications (terrain analysis, site investigation, material inventories).",
+       tip:"3 saal me sarvaadhik repeat hone wala U2/U3 topic."},
+      {s:3, y:["Jun 2025"],
+       q:"GPS ke saath positioning ka principle neat sketch ke saath.",
+       tip:"Trilateration concept + 3 satellites + receiver clock."},
+      {s:3, y:["Jun 2026"],
+       q:"Distances aur elevations measure karne ke methods — conventional vs EDM ki comparison; area & volume computation.",
+       tip:"Jun 2026 me ye dono hi pooche gaye the."},
+      {s:2, y:["Nov 2022","Jun 2026"],
+       q:"Plane table & related instruments; survey stations aur unka classification; reciprocal levelling.",
+       tip:"Ye chhote short notes hai — 2-3 marks."}
+     ]}
+  ],
+  papers:["bt-204-basic-civil-engineering-and-mechanics-jun-2026",
+          "bt-204-basic-civil-engineering-%26-mechanics-dec-2025",
+          "bt-204-basic-civil-engineering-and-engineering-mechanics-jun-2025",
+          "bt-204-basic-civil-engineering-and-engineering-mechanics-dec-2024",
+          "bt-204-basic-civil-engineering-and-engineering-mechanics-jun-2024",
+          "bt-204-basic-civil-engineering-and-engineering-mechanics-dec-2023",
+          "bt-204-basic-civil-engineering-and-engineering-mechanics-jun-2023",
+          "bt-204-basic-civil-engineering-and-engineering-mechanics-nov-2022",
+          "bt-204-basic-civil-engineering-and-engineering-mechanics-jun-2022",
+          "bt-204-basic-civil-engineering-and-engineering-mechanics-jun-2020"],
+  verbatim:[
+   {label:"June 2026", slug:"bt-204-basic-civil-engineering-and-mechanics-jun-2026",
+    u12:["Q1(a) Cement ke properties, laboratory tests aur engineering applications — concrete ki quality par effect ke saath.",
+         "Q1(b) Bricks aur stones ke types, properties aur engineering uses.",
+         "Q2(a) Spread footing aur RCC footing ki construction & suitability (neat sketches ke saath).",
+         "Q2(b) Theodolite aur electronic surveying instruments ka principle, construction aur applications.",
+         "Q3(a) Surveying me distances & elevations measurement ke methods; conventional methods vs EDM.",
+         "Q3(b) Numerical: B.S. = 1.425 m, F.S. = 2.165 m, BM RL = 100.000 m → Height of Instrument method se next point ka RL.",
+         "Q4(a) Contouring ka principle + civil engineering projects me applications.",
+         "Q4(b) Civil engineering me remote sensing ke applications + conventional surveying par advantages.",
+         "Q5(a) Area & volume computation ke methods — earthwork estimation me applications."],
+    rest:"U4: coplanar forces ki equilibrium conditions + Free Body Diagram ka significance; Method of Joints (assumptions & limitations); dry friction ke laws. U5: centroid vs centre of gravity; SFD/BMD for simply supported beam; radius of gyration, plastering & pointing, reciprocal levelling, survey stations."},
+   {label:"June 2025", slug:"bt-204-basic-civil-engineering-and-engineering-mechanics-jun-2025",
+    u12:["Q1(b) Stones ki different characteristics + testing methods + building work me use hone wale stones ke naam.",
+         "Q2(a) GPS ke saath positioning ka principle (neat sketch).",
+         "Q2(b) Brick masonry construction me observe karne wale general principles.",
+         "Q3(a) Stone masonry ke various types + typical sketches.",
+         "Q3(b) Mortar kya hai + mortar requirement ki estimation.",
+         "Q4(a) Remote sensing ke applications: terrain analysis, construction material inventories, site investigation."],
+    rest:"U4/U5: D'Alembert's principle; simple bending assumptions + bending equation; inclined plane friction numerical (180 N / 210 N wala); axial pull numerical (200 m rod, E = 210 GPa); work-energy principle + rolling cylinder KE."},
+   {label:"November 2022", slug:"bt-204-basic-civil-engineering-and-engineering-mechanics-nov-2022",
+    u12:["Q1(a) Concrete ke physical aur chemical properties.",
+         "Q1(b) Building construction me staircase ke different types (neat sketch).",
+         "Q2(a) Theodolite ke individual components + sketch.",
+         "Q2(b) Construction industry me use hone wale stones ka classification.",
+         "Q3(a) Remote sensing aur construction me uske applications.",
+         "Q4(a) Contour line, contour interval, horizontal equivalent aur contour map ka use.",
+         "Q5(a) Height of Collimation vs Rise and Fall method ka difference.",
+         "Q5(b) Numerical: 12 consecutive levelling readings, instrument 4th & 8th ke baad shifted, last reading BM RL 110.200 m → Rise & Fall method se saare RL + arithmetic check.",
+         "Q8(a) Centroid aur centre of gravity ka short note."],
+    rest:"U4: Lami's theorem + numerical; friction numerical (10 kg block, 45° incline, μs = 0.5). U5: moment of inertia vs product of inertia; Method of Joints vs Method of Sections; SFD/BMD for UDL on simply supported beam."}
+  ]
+},
+{
+  id:"bt205", code:"BT-205", name:"Basic Computer Engineering",
+  set:"SET-B · Sem-1 · AIML", paper:"70 marks, attempt any 5 of 8",
+  trends:"BCE me 2024 ke baad se paper ka <b>flavour badal gaya hai</b>: thodi si <b>MS-Office, cloud, e-commerce/social-media aur real-life applications</b> wali questions aa gayi hain, aur pure-theory wale sawaal (classification, OS functions) ab bhi hain. <b>OOP vs POP</b> aur <b>OS functions</b> ek bhi saal miss nahi hue.",
+  units:[
+   { t:"Unit 1 · Computer & Operating System",
+     hint:"Computer organization + OS functions — ye do hi Unit-1 ka 80% hain. Isme diagram (block diagram) bahut important hai.",
+     qs:[
+      {s:5, y:["Dec 2022","May 2019","Jun 2013","Jun 2011","Dec 2012","Dec 2025"],
+       q:"Computer ka classification (analog, digital, hybrid / micro se super tak) examples ke saath; computer ki generations.",
+       tip:"Table format me likhna — generation, technology, example."},
+      {s:5, y:["Jun 2020","Jun 2024","Dec 2025"],
+       q:"Computer ka block diagram / organization — CPU (registers, bus architecture, instruction set), memory, I/O devices ka function.",
+       tip:"Dec 2025 Q1(b) me CPU organization directly poocha gaya tha. Block diagram ke saath 6-7 components ke functions."},
+      {s:5, y:["Dec 2022","Jun 2020","Dec 2025","Jun 2026"],
+       q:"Operating system — definition aur functions; file management, process management aur memory management explain karo.",
+       tip:"Jun 2026 ke paper ka pehla question yahi tha (file/process/memory ke saath). 7-8 marks ka confirmed question."},
+      {s:4, y:["Jun 2020 CBGS","Dec 2025"],
+       q:"System software vs application software — difference with examples.",
+       tip:"Table + 4-4 examples."},
+      {s:4, y:["Nov 2018","Dec 2025","Jun 2026"],
+       q:"Memory & storage systems, memory hierarchy aur I/O devices.",
+       tip:"Memory hierarchy diagram (register → cache → RAM → secondary → tertiary)."},
+      {s:3, y:["Jun 2026","Jun 2024"],
+       q:"MS-Word, MS-Excel aur MS-PowerPoint ke main features + office automation me importance (SUM, AVERAGE, MAX functions ke examples).",
+       tip:"Naya pattern (2024 aur 2026 me aaya) — ho sakta hai MSE me bhi aa jaye."},
+      {s:4, y:["Jun 2026","Dec 2020"],
+       q:"Areas me computers ka role: e-business, bioinformatics, healthcare, remote sensing & GIS, meteorology, multimedia & animation.",
+       tip:"4 areas choose karke examples likhna — Jun 2026 me exactly ye format tha."},
+      {s:3, y:["Dec 2015","Jun 2020","May 2018","Jun 2016"],
+       q:"Instruction set kya hai? CPU instruction execute karne ke steps.",
+       tip:"Fetch → Decode → Execute → Store cycle likho."}
+     ]},
+   { t:"Unit 2 · Introduction to Algorithms & C++",
+     hint:"Yahan algorithm/flowchart + OOP concepts + C++ program structure — teen cheezein hi kaafi hain.",
+     qs:[
+      {s:5, y:["Jun 2022","Jun 2020","Jun 2024","Dec 2025","Jun 2026"],
+       q:"Algorithm kya hai — characteristics aur flowchart (jaise 'three numbers me se largest nikaalo'); program design aur advantages.",
+       tip:"Jun 2026 me flowchart directly manga gaya tha. Ek flowchart yaad karo — largest of three."},
+      {s:5, y:["Jun 2024","Jun 2026","Dec 2025","Dec 2022"],
+       q:"OOP ke fundamental characteristics/principles; Procedure-Oriented Programming (POP) vs OOP — difference aur limits.",
+       tip:"Table banao: data hiding, encapsulation, inheritance, polymorphism, abstraction."},
+      {s:4, y:["Jun 2020 CBGS","Dec 2025"],
+       q:"C++ program ki basic structure aur tokens (keywords, identifiers, constants, operators).",
+       tip:"Ek chhota program likh ke tokens label karo — examiner ko impress karta hai."},
+      {s:4, y:["Jun 2020","Jun 2024","Dec 2025","Jun 2026"],
+       q:"C++ me arrays (1-D vs multi-dimensional) aur different types of functions.",
+       tip:"Function types: function with/without arguments & return values."},
+      {s:3, y:["Jun 2020","Jun 2022"],
+       q:"Looping statements (for, while, do-while) with examples; program: binary number ko decimal me convert karo.",
+       tip:"Jun 2022 me binary→decimal program aaya tha — code rat lo, 10 line ka hi hai."},
+      {s:2, y:["Jun 2026","Dec 2025"],
+       q:"Scope resolution operator (::) kya hai + C++ me iske applications; local vs global variables.",
+       tip:"Jun 2026 Q4(a) me full 7 marks ka sawaal tha."},
+      {s:4, y:["Dec 2017","Jun 2024","Jun 2022","Jun 2026"],
+       q:"Inheritance — definition aur types (single, multiple, multilevel, hierarchical, hybrid) diagrams/programs ke saath; class vs structure.",
+       tip:"Diagram se dikhana — RGPV ko diagram wale answers pasand hain."},
+      {s:4, y:["Dec 2022","Jun 2024","Jun 2026"],
+       q:"Polymorphism: function overloading, operator overloading aur virtual functions with examples.",
+       tip:"Jun 2026 Q5(a) me teeno ek hi question me the."},
+      {s:3, y:["Dec 2017","Dec 2025"],
+       q:"Constructors aur destructors — concept with example; friend function.",
+       tip:"Friend function Jun 2022 aur Jun 2026 (short note) me aaya."}
+     ]}
+  ],
+  papers:["bt-205-basic-computer-engineering-jun-2026","bt-205-basic-computer-engineering-dec-2025",
+          "bt-205-basic-computer-engineering-jun-2025","bt-205-basic-computer-engineering-dec-2024",
+          "bt-205-basic-computer-engineering-jun-2024","bt-205-basic-computer-engineering-dec-2023",
+          "bt-205-basic-computer-engineering-jun-2023","bt-205-basic-computer-engineering-nov-2022",
+          "bt-205-basic-computer-engineering-jun-2022","bt-205-basic-computer-engineering-jun-2020"],
+  verbatim:[
+   {label:"June 2026", slug:"bt-205-basic-computer-engineering-jun-2026",
+    u12:["Q1(a) What is an Operating System? Major functions + how it manages files, processes and memory.",
+         "Q1(b) MS-Word, MS-Excel, MS-PowerPoint ke main features + office automation me importance.",
+         "Q2(a) Any four areas me computers ka role: E-Business, Bioinformatics, Healthcare, Remote Sensing & GIS, Meteorology, Multimedia & Animation.",
+         "Q2(b) OOP ke fundamental characteristics; OOP kaise POP ki limitations overcome karta hai?",
+         "Q3(a) Algorithm define karo, characteristics; three numbers me largest nikaalne ka flowchart + flowcharts ke advantages.",
+         "Q3(b) C++ me array kya hai? Different types of functions with examples.",
+         "Q4(a) Scope resolution operator + applications in C++; local vs global variables.",
+         "Q4(b) Inheritance in C++ + different types with diagrams/examples.",
+         "Q5(a) Polymorphism in C++ + function overloading, operator overloading, virtual functions."],
+    rest:"U4: computer networking objectives + ISO-OSI model layers; computer security (viruses, worms, Trojans, malware), firewall, computer ethics & cyber laws. U5: DBA role, primary key, cloud computing + IaaS/PaaS/SaaS. Short notes: memory hierarchy, friend function, WWW, data dictionary."},
+   {label:"December 2025", slug:"bt-205-basic-computer-engineering-dec-2025",
+    u12:["Q1(a) Define computer and explain its classification.",
+         "Q1(b) CPU organization — registers, bus architecture, instruction set.",
+         "Q2(a) Memory & storage systems along with I/O devices.",
+         "Q2(b) System software vs application software with examples.",
+         "Q3(a) Operating systems & its main functions.",
+         "Q3(b) File, process and memory management in OS.",
+         "Q4(a) Algorithms, flowcharts and program design.",
+         "Q4(b) Programming paradigms + characteristics of OOP.",
+         "Q5(a) POP vs OOP comparison.",
+         "Q5(b) C++ program ki basic structure aur tokens.",
+         "Q6(a) Arrays and functions in C++.",
+         "Q6(b) Constructors, destructors aur scope resolution operator."],
+    rest:"U4: ISO-OSI model + layers; TCP/IP model, internetworking devices, Internet applications. U5: DBMS vs file system; cloud computing models, types, advantages."},
+   {label:"June 2024", slug:"bt-205-basic-computer-engineering-jun-2024",
+    u12:["Q1(a) Explain the organization of computer with the help of block diagram.",
+         "Q1(b) Excel ke basic mathematical functions (SUM, AVERAGE, MAX) ke examples.",
+         "Q2(a) Word document me headers & footers kaise insert karte hain?",
+         "Q2(b) Microsoft Office kya hai aur uska primary purpose?",
+         "Q3(a) Generations of computers.",
+         "Q3(b) OOP ke principles kya hain?",
+         "Q4(a) Single inheritance vs multiple inheritance.",
+         "Q4(b) Operator overloading with example.",
+         "Q5(a) Operator overloading kya hai aur C++ me useful kyon hai?",
+         "Q5(b) 1-D vs multi-dimensional arrays ka difference."],
+    rest:"U5: cloud computing + Internet relationship; e-commerce marketing me social media ki role; cyber threats (malware, phishing, DoS); database transaction & data integrity. Short notes: DDL/DML commands, remote sensing & GIS, I/O device."}
+  ]
+}
+];
+
+/* ---- SET-A (Sem-2 for AIML) quick link grids ---- */
+const SETA = [
+ {code:"BT-101", name:"Engineering Chemistry", slugs:["bt-101-engineering-chemistry-jun-2026","bt-101-engineering-chemistry-dec-2025","bt-101-engineering-chemistry-jun-2025","bt-101-engineering-chemistry-dec-2024","bt-101-engineering-chemistry-jun-2024","bt-101-engineering-chemistry-dec-2023","bt-101-engineering-chemistry-jun-2023","bt-101-engineering-chemistry-nov-2022","bt-101-engineering-chemistry-jun-2022","bt-101-engineering-chemistry-dec-2020","bt-101-engineering-chemistry-jun-2020"],
+   imp:"https://career-shiksha.com/post/important-rgpv-question-bt-101-engineering-chemistry-1st-year/"},
+ {code:"BT-102", name:"Mathematics-I", slugs:["bt-102-mathematics-1-jun-2026","bt-102-mathematics-1-dec-2025","bt-102-mathematics-1-jun-2025","bt-102-mathematics-1-dec-2024","bt-102-mathematics-1-jun-2024","bt-102-mathematics-1-dec-2023","bt-102-mathematics-1-jun-2023","bt-102-mathematics-1-nov-2022","bt-102-mathematics-jun-2022","bt-102-mathematics-1-dec-2020","bt-102-mathematics-1-jun-2020"],
+   imp:"https://career-shiksha.com/post/important-rgpv-question-bt-202-mathematics-ii-1st-year/"},
+ {code:"BT-103", name:"English for Communication", slugs:["bt-103-english-for-communication-jun-2026","bt-103-english-for-communication-dec-2025","bt-103-english-for-communication-jun-2025","bt-103-english-for-communication-dec-2024","bt-103-english-for-communication-jun-2024","bt-103-english-for-communication-dec-2023","bt-103-english-for-communication-jun-2023","bt-103-english-for-communication-nov-2022","bt-103-english-for-communication-jun-2022","bt-103-english-for-communication-dec-2020"],
+   imp:"https://career-shiksha.com/post/important-rgpv-question-bt-103-english-for-communication-1st-year/"},
+ {code:"BT-104", name:"Basic Electrical & Electronics Engg.", slugs:["bt-104-basic-electrical-and-electronics-engineering-jun-2026","bt-104-basic-electrical-and-electronics-engineering-dec-2025","bt-104-basic-electrical-and-electronics-engineering-jun-2025","bt-104-basic-electrical-and-electronics-engineering-dec-2024","bt-104-basic-electrical-and-electronics-engineering-jun-2024","bt-104-basic-electrical-and-electronics-engineering-dec-2023","bt-104-basic-electrical-and-electronics-engineering-jun-2023","bt-104-basic-electrical-and-electronics-engineering-nov-2022","bt-104-basic-electrical-and-electronics-engineering-jun-2022","bt-104-basic-electrical-and-electronics-engineering-jun-2020"],
+   imp:"https://career-shiksha.com/post/important-rgpv-question-bt-104-beee-1st-year/"},
+ {code:"BT-105", name:"Engineering Graphics", slugs:["bt-105-engineering-graphics-jun-2026","bt-105-engineering-graphics-dec-2025","bt-105-engineering-graphics-jun-2025","bt-105-engineering-graphics-dec-2024","bt-105-engineering-graphics-jun-2024","bt-105-engineering-graphics-dec-2023","bt-105-engineering-graphics-jun-2023","bt-105-engineering-graphics-nov-2022","bt-105-engineering-graphics-jun-2022","bt-105-engineering-graphics-jun-2020"],
+   imp:"https://career-shiksha.com/post/important-rgpv-question-bt-105-engineering-graphics-1st-year/"}
+];
+
+/* ---------------- UTILITIES ---------------- */
+const STORE_KEY = "rgpv-aiml-midsem-progress-v1";
+const progress = JSON.parse(localStorage.getItem(STORE_KEY) || "{}");
+const saveProgress = () => localStorage.setItem(STORE_KEY, JSON.stringify(progress));
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const yearLabel = s => s.replace(/-/g," ").replace(/jun/i,"Jun").replace(/dec/i,"Dec").replace(/nov/i,"Nov")
+  .replace(/mathematics 1/,"Mathematics-I").replace(/mathematics 2/,"Mathematics-II")
+  .replace(/basic mechanical engineering/i,"BME").replace(/basic computer engineering/i,"BCE")
+  .replace(/engineering physics/i,"Physics").replace(/^bt \d+ /i,"").trim();
+
+document.getElementById("tabs").innerHTML =
+  '<button class="active" data-t="guide">📌 Exam &amp; Strategy</button>' +
+  SUBJECTS.map(s => `<button data-t="${s.id}">${s.code} ${s.name.split(" ")[0]}</button>`).join("") +
+  '<button data-t="plan">🗓️ 7-Din Plan</button>' +
+  '<button data-t="seta">🔗 Sem-2 / SET-A</button>' +
+  '<button data-t="sources">📚 Sources</button>';
+
+/* ---------------- SUBJECT RENDER ---------------- */
+function renderSubjects(){
+  const host = document.getElementById("subject-host");
+  host.innerHTML = SUBJECTS.map((s, si) => {
+    const units = s.units.map((u, ui) => `
+      <div class="unit">
+        <h4>${u.t}</h4>
+        <div class="hint">${u.hint}</div>
+        <ul class="q">
+        ${u.qs.map((q, qi) => {
+          const id = `${s.id}-${ui}-${qi}`;
+          return `<li data-stars="${q.s}" data-id="${id}">
+            <input class="chk" type="checkbox" data-id="${id}" ${progress[id] ? "checked" : ""} />
+            <div>
+              <div class="qtext">${esc(q.q)}</div>
+              <div class="meta">
+                <span class="stars">${"★".repeat(q.s)}${"☆".repeat(5-q.s)}</span>
+                ${q.y.map(y => `<span class="yr">${esc(y)}</span>`).join("")}
+              </div>
+              ${q.tip ? `<div class="tip">💡 ${esc(q.tip)}</div>` : ""}
+            </div>
+          </li>`;
+        }).join("")}
+        </ul>
+      </div>`).join("");
+
+    const verbatim = (s.verbatim || []).map(v => `
+      <details>
+        <summary>${v.label} — actual paper ke questions (U1-2 focus)</summary>
+        <ol>${v.u12.map(x => `<li>${esc(x)}</li>`).join("")}</ol>
+        ${v.rest ? `<p class="sub" style="margin-top:10px"><b>Baaki paper:</b> ${v.rest}</p>` : ""}
+        <div class="links">
+          <a href="${pdf(v.slug)}" target="_blank" rel="noopener">📄 PDF kholo</a>
+          <a href="${page(v.slug)}" target="_blank" rel="noopener">🔗 Paper page</a>
+        </div>
+      </details>`).join("");
+
+    return `<div class="panel" data-subject="${s.id}" style="display:none">
+      <h2>${s.code} · ${s.name} <span class="pill b">${s.set}</span></h2>
+      <p class="sub">${s.paper} · Unit 1-2 = Mid-Sem-1 ka core syllabus</p>
+      <div class="trend"><b>📈 Trend (2022 → Jun 2026):</b> ${s.trends}</div>
+      <h3>Unit-wise Most-Repeated Questions</h3>
+      ${units}
+      <h3>Last papers ke actual questions (verbatim)</h3>
+      ${verbatim || '<p class="sub">Is subject ke verbatim papers neeche archive me diye hain.</p>'}
+      <h3>PYQ Archive — direct PDF links (2020 → Jun 2026)</h3>
+      <div class="links">
+        ${s.papers.map(p => `<a href="${pdf(p)}" target="_blank" rel="noopener">${yearLabel(p)}</a>`).join("")}
+      </div>
+      <div class="warn" style="margin-top:16px">
+        <b>Practice tip:</b> har paper me se sirf <b>Unit 1-2 wale questions</b> pehle solve karo (Q1-Q3 lagbhag).
+        Isse mid-sem ka 100% pattern cover ho jayega — baaki units Sem ke end me.
+      </div>
+    </div>`;
+  }).join("");
+
+  // SET-A link grids
+  document.getElementById("seta-links").innerHTML = SETA.map(s => `
+    <div class="unit">
+      <h4>${s.code} · ${s.name}</h4>
+      <div class="links">
+        ${s.slugs.map(p => `<a href="${pdf(p)}" target="_blank" rel="noopener">${yearLabel(p)}</a>`).join("")}
+      </div>
+      <div class="links"><a href="${s.imp}" target="_blank" rel="noopener">⭐ Important Questions page (unit-wise)</a></div>
+    </div>`).join("");
+}
+
+/* ---------------- TABS ---------------- */
+function activate(id){
+  const host = document.getElementById("subject-host");
+  document.querySelectorAll("nav.tabs button").forEach(b => b.classList.toggle("active", b.dataset.t === id));
+  document.querySelectorAll("section.subject").forEach(sec => sec.classList.remove("active"));
+  if(id === "guide" || id === "plan" || id === "seta" || id === "sources"){
+    host.style.display = "none";
+    document.getElementById(id).classList.add("active");
+  } else {
+    host.querySelectorAll("[data-subject]").forEach(p =>
+      p.style.display = (p.dataset.subject === id) ? "block" : "none");
+    host.style.display = "block";
+    host.classList.add("active");
+  }
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+document.getElementById("tabs").addEventListener("click", e => {
+  const b = e.target.closest("button[data-t]");
+  if(b) activate(b.dataset.t);
+});
+
+/* ---------------- SEARCH / FILTER / PROGRESS ---------------- */
+function refreshProgress(){
+  const boxes = [...document.querySelectorAll(".chk")];
+  const done = boxes.filter(b => b.checked).length;
+  document.getElementById("ptext").textContent = `${done} / ${boxes.length} done`;
+  document.getElementById("pbar").style.width = boxes.length ? (done/boxes.length*100) + "%" : "0%";
+}
+document.addEventListener("change", e => {
+  if(e.target.classList.contains("chk")){
+    progress[e.target.dataset.id] = e.target.checked;
+    saveProgress(); refreshProgress();
+  }
+});
+document.getElementById("reset-progress").addEventListener("click", () => {
+  Object.keys(progress).forEach(k => delete progress[k]);
+  saveProgress();
+  document.querySelectorAll(".chk").forEach(b => b.checked = false);
+  refreshProgress();
+});
+
+function applyFilters(){
+  const term = document.getElementById("search").value.trim().toLowerCase();
+  const mode = document.getElementById("filter").value;
+  let visible = 0;
+  document.querySelectorAll('#subject-host ul.q li').forEach(li => {
+    const text = li.querySelector(".qtext").textContent;
+    const stars = +li.dataset.stars;
+    const done = li.querySelector(".chk").checked;
+    let ok = true;
+    if(term && !text.toLowerCase().includes(term)) ok = false;
+    if(mode === "5" && stars < 5) ok = false;
+    if(mode === "4" && stars < 4) ok = false;
+    if(mode === "pending" && done) ok = false;
+    li.style.display = ok ? "" : "none";
+    if(ok) visible++;
+  });
+  // search karte waqt saare subjects ek saath dikhao
+  if(term || mode !== "all"){
+    document.querySelectorAll("section.subject").forEach(sec => sec.classList.remove("active"));
+    const host = document.getElementById("subject-host");
+    host.classList.add("active");
+    host.style.display = "block";
+    // filter lagne par saare units ke headers bhi dikhne chahiye
+    host.querySelectorAll(".unit").forEach(u => u.style.display = "");
+    host.querySelectorAll("[data-subject]").forEach(p => p.style.display = "block");
+    document.querySelectorAll("nav.tabs button").forEach(b => b.classList.remove("active"));
+  }
+  return visible;
+}
+document.getElementById("search").addEventListener("input", applyFilters);
+document.getElementById("filter").addEventListener("change", () => { applyFilters(); refreshProgress(); });
+document.getElementById("clear-search").addEventListener("click", () => {
+  document.getElementById("search").value = "";
+  document.getElementById("filter").value = "all";
+  document.querySelectorAll('#subject-host ul.q li').forEach(li => li.style.display = "");
+  activate(SUBJECTS[0].id);
+});
+
+renderSubjects();
+document.querySelector('#subject-host [data-subject="bt201"]').style.display = "block";
+document.getElementById("subject-host").style.display = "none";
+refreshProgress();
+</script>
+</body>
+</html>
